@@ -1,10 +1,10 @@
-This is a fork of https://github.com/LupoLab-UCSF/CMB_labeler, updated to fix broken functionality. 
+This is a fork of https://github.com/LupoLab-UCSF/CMB_labeler, unpacked and updated to fix broken functionality.
 
 # ORIGINAL AUTHORS/CONTRIBUTORS:
 Wei Bian, Melanie A. Morrison, Xiaowei Zhu, Sivakami Avadiappan, Yicheng Chen, Seyedmehdi Payabvash, Mihir Shah, Christopher. P. Hess, Janine M. Lupo 
 
 # REVELANT PUBLICATIONS: 
-*We request that you cite the following publications when using our software in your research. Thank you!*
+*They requested that you cite the following publications when using their software in your research.*
 
 Morrison MA, Payabvash S, Chen Y, Avadiappan S, Shah M, Bian W, Zou X, Hess C, Lupo JM. A user-guided tool for semi-automated cerebral microbleed detection and volume segmentation: evaluating vascular injury and data labelling for machine learning; 2018, NeuroImage: Clinical, 20: 498-505.
 
