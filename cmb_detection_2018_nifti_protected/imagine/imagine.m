@@ -190,6 +190,7 @@ SMouse                 = [];    % A Struct to hold parameters of the mouse opera
 % Read the preferences from the save file
 iPosition = [100 100 1000 600];
 if exist(SPref.sSaveFilename, 'file')
+    SSaveVar = [];
     load(SPref.sSaveFilename);
     SState.sPath            = SSaveVar.sPath;
     SState.csEvalLineFcns   = SSaveVar.csEvalLineFcns;
@@ -649,7 +650,7 @@ argout = hF;
         % -----------------------------------------------------------------
         % Get the source's (pressed buttton) data and exit if disabled
         iInd = find(SImg.hIcons == hObject);
-        if ~SIcons(iInd).Enabled, return, end;
+        if ~SIcons(iInd).Enabled, return, end
         % -----------------------------------------------------------------
         
         sActivate = [];
@@ -682,11 +683,11 @@ argout = hF;
                                 '*.gipl; *.GIPL', 'Guys Image Processing Lab Files (*.gipl)'}, ...
                                 'OpenLocation'  , SState.sPath, ...
                                 'Multiselect'   , 'on');
-                            if isnumeric(sPath), return, end;   % Dialog aborted
+                            if isnumeric(sPath), return, end   % Dialog aborted
                         else
                             % Load a folder
                             sPath = uigetdir(SState.sPath);
-                            if isnumeric(sPath), return, end;
+                            if isnumeric(sPath), return, end
                             
                             sPath = [sPath, filesep];
                             SFiles = dir(sPath);
@@ -725,7 +726,7 @@ argout = hF;
                                 '*.png', 'Portable Network Graphics (*.png)'}, ...
                                 'Save selected series to files', ...
                                 [SState.sPath, filesep, '%SeriesName%_%ImageNumber%']);
-                            if isnumeric(sPath), return, end;   % Dialog aborted
+                            if isnumeric(sPath), return, end   % Dialog aborted
                             
                             SState.sPath = sPath;
                             fSaveToFiles(sFilename, sPath);
@@ -738,7 +739,7 @@ argout = hF;
                                 '*.png', 'Portable Network Graphics (*.png)'}, ...
                                 'Save MASK of selected series to files', ...
                                 [SState.sPath, filesep, '%SeriesName%_%ImageNumber%_Mask']);
-                            if isnumeric(sPath), return, end;   % Dialog aborted
+                            if isnumeric(sPath), return, end   % Dialog aborted
                             
                             SState.sPath = sPath;
                             fSaveMaskToFiles(sFilename, sPath);
@@ -785,10 +786,10 @@ argout = hF;
                         sColormap = fColormapSelect(STexts.hStatus);
                         if ~isempty(sColormap)
                             eval(sprintf('dColormap = %s(SAp.iCOLORMAPLENGTH);', sColormap));
-                            SState.dColormapBack = dColormap;
+                            SState.dColormapBack = sColormap;
                             fFillPanels;
                             eval(sprintf('colormap(%s(256));', sColormap));
-                            set(SAxes.hImg, 'Color', dColormap(1,:));
+                            set(SAxes.hImg, 'Color', sColormap(1,:));
                         end
                     % - - - - - - - - - - - - - - - - - - - - - - - - - - -
                     
@@ -898,10 +899,10 @@ argout = hF;
                 % Right-click setup menus
                 if strcmp(get(hF, 'SelectionType'), 'alt') && ~isfield(eventdata, 'Character')% Right click, open tool settings in neccessary
                     switch SIcons(iInd).Name
-                        case 'line',
+                        case 'line'
                             csFcns = fSelectEvalFcns(SState.csEvalLineFcns, [SPref.sMFILEPATH, filesep, 'EvalFunctions']);
                             if iscell(csFcns), SState.csEvalLineFcns = csFcns; end
-                        case {'roi', 'lw'},
+                        case {'roi', 'lw'}
                             csFcns = fSelectEvalFcns(SState.csEvalROIFcns, [SPref.sMFILEPATH, filesep, 'EvalFunctions']);
                             if iscell(csFcns), SState.csEvalROIFcns = csFcns; end
                         case 'rg'
@@ -1610,8 +1611,8 @@ argout = hF;
             % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             % The REGION GROWING tool
             case 'rg'
-                if ~strcmp(get(hF, 'SelectionType'), 'normal'), return, end; % Otherwise calling the context menu starts a rg
-                if ~iAxisInd || iAxisInd > length(SData), return, end;
+                if ~strcmp(get(hF, 'SelectionType'), 'normal'), return, end % Otherwise calling the context menu starts a rg
+                if ~iAxisInd || iAxisInd > length(SData), return, end
 
                 iSeriesInd = iAxisInd + SState.iStartSeries - 1;
                 iSize = size(SData(iSeriesInd).dImg);
@@ -1625,7 +1626,7 @@ argout = hF;
             % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             % The ISOCONTOUR tool
             case 'ic'
-                if ~iAxisInd || iAxisInd > length(SData), return, end;
+                if ~iAxisInd || iAxisInd > length(SData), return, end
                 
                 iSeriesInd = iAxisInd + SState.iStartSeries - 1;
                 iSize = size(SData(iSeriesInd).dImg);
@@ -1640,7 +1641,7 @@ argout = hF;
             % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             % The PROPERTIES tool: Rename the data
             case 'tag'
-                if ~iAxisInd || iAxisInd > length(SData), return, end;
+                if ~iAxisInd || iAxisInd > length(SData), return, end
                 
                 iSeriesInd = SState.iStartSeries + iAxisInd - 1;
                 csPrompt = {'Name', 'Voxel Size', 'Units'};
@@ -1926,7 +1927,7 @@ argout = hF;
                 set(get(hAEval, 'XLabel'), 'String', 'Time Point');
                 set(get(hAEval, 'YLabel'), 'String', 'Value');
             else
-                for i = 1:length(cData);
+                for i = 1:length(cData)
                     plot(cData{i}, 'Color', SPref.dCOLORMAP(i,:));
                 end
                 legend(csSeriesName); % Show legend
@@ -2007,7 +2008,7 @@ argout = hF;
     
     function sString = fPrintCell(sFormatString, csCell)
         sString = '';
-        for i = 1:length(csCell);
+        for i = 1:length(csCell)
             sString = sprintf(['%s', sFormatString], sString, csCell{i});
         end
     end
@@ -2136,7 +2137,7 @@ argout = hF;
                 switch SState.sDrawMode
                     case {'mag', 'phase'}
                         dImg = zeros(size(SData(iSeriesInd).dImg));
-                        for iJ = 1:size(SData(iSeriesInd).dImg, 3);
+                        for iJ = 1:size(SData(iSeriesInd).dImg, 3)
                             dImg(:,:,iJ) = fGetImg(iSeriesInd, iJ);
                         end
                     case {'min', 'max'}
@@ -2385,7 +2386,7 @@ argout = hF;
 %         lMask = [];
 %         iInd = iInd + 1;
         
-        while iInd <= length(cInput);
+        while iInd <= length(cInput)
             xInput = cInput{iInd};
             if ~(isnumeric(xInput) || islogical(xInput) || iscell(xInput) || ischar(xInput)), error('Argument %d expected to be either property or data!', iInd); end
 
@@ -3084,7 +3085,7 @@ lActive = false(length(SDir), 1);
 csNames = cell(length(SDir), 1);
 for iI = 1:length(SDir)
     csNames{iI} = SDir(iI).name(1:end-2);
-    for iJ = 1:length(csActive);
+    for iJ = 1:length(csActive)
         if strcmp(csNames{iI}, csActive{iJ}), lActive(iI) = true; end
     end
 end
