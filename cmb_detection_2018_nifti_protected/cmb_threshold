@@ -1,0 +1,16 @@
+radii 3
+alpha 3
+prctTH 90
+minVesArea 25
+lowerTH1 10
+lowerTH2 65
+upperTH  170
+maxIntensityDiff 60
+maxDist 5
+maxSlice 1
+maxArea 10
+minCircularity 0.73
+maxCentroidShift 0.5
+maxIntensity 150
+
+

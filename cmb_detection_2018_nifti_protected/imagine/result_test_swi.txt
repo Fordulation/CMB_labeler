@@ -1,0 +1,5 @@
+
+ CMB Detection & Segmentation 
+
+ The number of potential CMB candidates before 3D region growing is 2426
+ The number of CMB candidates detected after 3D region growing is 400
