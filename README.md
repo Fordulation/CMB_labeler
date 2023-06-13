@@ -29,7 +29,7 @@ Primary outputs include:
 MATLAB Protected Files 
 
 # PREREQUISITES: 
-1) MATLAB installed with a toolbox, I forgot which one
+1) MATLAB installed with statistics and machine learning toolbox
 
 # USAGE: 
 1) Add cmb_detection_2018_nifti_protected and sub folders to your matlab path
