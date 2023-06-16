@@ -20,10 +20,12 @@ Primary outputs include:
 2) FRST_map_masked[rootName].nii – cmb candidates after FRST
 3) FRST_Vessel_mask[rootName].nii – mask of vessels 
 4) cmb[rootName].nii – cmb candidates after region growing 
-5) nonproj_cmbseg_v5_thresdeg2x5final_usercorrected[rootName].nii – *final cmb candidates*
-6) nonproj_cmbseg_v5_thresdeg2x5denoised[rootName].nii – all cmb candidates automatically removed at denoising stage
-7) nonproj_cmbseg_v5_thresdeg2x5false_positives[rootName].nii – all cmb candidates manually removed as false positives by the user
-8) result_[rootName].txt – a text file containing all cmb counts and cmb volumes
+5) nonproj_cmbseg_label_v5_thresdeg2x5scaled_[rootName].nii – an *n*ary mask of the cmb candidate rois. 
+6) nonproj_cmbseg_v5_threshdeg2x5scaled_[rootName].nii – a binary mask for all cmb candidate voxels. 
+7) nonproj_cmbseg_v5_thresdeg2x5denoisedscaled_[rootName].nii – all cmb candidates automatically removed at denoising stage
+8) nonproj_cmbseg_v5_thresdeg2x5final_usercorrectedscaled_[rootName].nii – Original documentation was incorrect, but this appears to be a binary representation of the cmd candidates removed automatically at denoising as well as removed via user correction. Unfortunately this is missing some ROI automatically removed, so it cannot be used as an exclusionary mask in combination with output (5) or (6) to produce a final volume of potential cmbs.
+9) result_[rootName].txt – a text file containing all cmb counts and cmb volumes - BUT NOT LOCATIONS!
+
    
 # FORMAT: 
 MATLAB Protected Files 
@@ -35,10 +37,10 @@ MATLAB Protected Files
 1) Add cmb_detection_2018_nifti_protected and sub folders to your matlab path
 2) In matlab, cd to the test_subect directory or your equivalent subject directory with your swi.nii file (this will also be the output directory)
 3) Run the following:
-cmb_detection('input file','path to cmb_threshold parameter file in directory','diagnostics flag','semi-automatic detection flag');
-
+>> cmb_detection('input file','path to cmb_threshold parameter file in directory','diagnostics flag','semi-automatic detection flag');
 e.g. 
-cmb_detection(‘test_swi.nii’, ‘/yourPath/cmb_detection_2018_nifti_protected’, ‘diagoff’, ‘semion’);
+>> cmb_detection(‘test_swi.nii’, ‘/yourPath/cmb_detection_2018_nifti_protected’, ‘diagoff’, ‘semion’);
+
 
 *When diagoff, the script runs faster and does not produce intermediate files for optimization purposes.
 *When semion, the user-guided classification is enabled.
