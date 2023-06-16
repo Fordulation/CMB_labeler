@@ -37,9 +37,9 @@ MATLAB Protected Files
 1) Add cmb_detection_2018_nifti_protected and sub folders to your matlab path
 2) In matlab, cd to the test_subect directory or your equivalent subject directory with your swi.nii file (this will also be the output directory)
 3) Run the following:
->> cmb_detection('input file','path to cmb_threshold parameter file in directory','diagnostics flag','semi-automatic detection flag');
+```>> cmb_detection('input file','path to cmb_threshold parameter file in directory','diagnostics flag','semi-automatic detection flag');```
 e.g. 
->> cmb_detection(‘test_swi.nii’, ‘/yourPath/cmb_detection_2018_nifti_protected’, ‘diagoff’, ‘semion’);
+```>> cmb_detection(‘test_swi.nii’, ‘/yourPath/cmb_detection_2018_nifti_protected’, ‘diagoff’, ‘semion’);```
 
 
 *When diagoff, the script runs faster and does not produce intermediate files for optimization purposes.
