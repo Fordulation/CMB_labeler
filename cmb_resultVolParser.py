@@ -40,8 +40,15 @@ file_name, file_extension = os.path.splitext(filename)
 nii_file_name = file_name.replace("result_","nonproj_cmbseg_v5_threshdeg2x5scaled_")
 niifile_path = os.path.join(directory, nii_file_name) + ".nii"
 #niifile_path = "/home/fordb/Desktop/microbleed_testing/_ob_pad/nonproj_cmbseg_v5_threshdeg2x5scaled_0a070a45d388c728c25604b5e29b55a1_pad.nii"
-img = nib.load(niifile_path)
-data = img.get_fdata()
+img = None
+data = None
+try:
+    img = nib.load(niifile_path)
+    data = img.get_fdata()
+except:
+    img = nib.load( os.path.join(directory, nii_file_name.replace("cmbseg_v5","cmbseg_label_v5") + ".nii"))
+    data = img.get_fdata()
+    data = (data > 0) * 1
 voxel_dimensions = img.header.get_zooms()
 voxel_volume = voxel_dimensions[0] * voxel_dimensions[1] * voxel_dimensions[2]
 zSize = data.shape[2]
